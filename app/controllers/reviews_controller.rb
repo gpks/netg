@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
       product.reviews << review
       redirect_to category_product_url(product.category, product), notice: 'Review was successfully created.'
     else
-      render action: 'new'
+      redirect_to category_product_url(product.category, product), notice: 'Review was not created.'
     end
   end
 
@@ -24,6 +24,6 @@ class ReviewsController < ApplicationController
 
   private
     def review_params
-      params.require(:review).permit(:content, :rating)
+      params.require(:review).permit(:content, :rating, :user_id, :product_id)
     end
 end

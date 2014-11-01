@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   expose(:category)
   expose(:products)
   expose(:product)
@@ -29,12 +30,14 @@ class ProductsController < ApplicationController
   end
 
   def update
+   
     if self.product.update(product_params)
       redirect_to category_product_url(category, product), notice: 'Product was successfully updated.'
     else
       render action: 'edit'
     end
   end
+ 
 
   # DELETE /products/1
   def destroy
