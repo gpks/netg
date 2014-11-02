@@ -14,7 +14,15 @@
         .navbar-header
           %span.navbar-brand Netguru Kraków Workshops 2014
         %p.navbar-text.navbar-right
-          Links should go here
+          - if user_signed_in? 
+            %p.navbar-text.navbar-right Logged in as  #{current_user.email} 
+            
+            %p.navbar-text.navbar-right= link_to 'Edit profile', edit_user_registration_path
+            %p.navbar-text.navbar-right= link_to "Logout", destroy_user_session_path, method: :delete 
+          - else 
+            %p.navbar-text.navbar-right= link_to "Sign up", new_user_registration_path
+            %p.navbar-text.navbar-right= link_to "Login", new_user_session_path
+          
     .container-fluid
       .row
         .col-lg-12

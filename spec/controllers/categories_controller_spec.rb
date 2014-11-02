@@ -10,14 +10,20 @@ describe CategoriesController do
 
   before do
     sign_in user
-    controller.stub(:user_signed_in?).and_return(true)
-    controller.stub(:current_user).and_return(user)
-    controller.stub(:authenticate_user!).and_return(user)
+    # account.stub(:closed?).and_return(false)
+    # allow(account).to receive(:closed?).and_return(false)
+    allow(controller).to receive(:user_signed_in?).and_return(true)
+    allow(controller).to receive(:current_user).and_return(user)
+    allow(controller).to receive(:authenticate_user!).and_return(user)
+    # controller.stub(:user_signed_in?).and_return(true)
+    # controller.stub(:current_user).and_return(user)
+    # controller.stub(:authenticate_user!).and_return(user)
   end
 
   context 'user is not an admin' do
     before do
-      controller.current_user.stub(admin?: false)
+      # controller.current_user.stub(admin?: false)
+      allow(user).to receive_messages(:admin? => false)
     end
 
     describe 'GET new' do
@@ -53,7 +59,8 @@ describe CategoriesController do
 
   context 'user is an admin' do
     before do
-      controller.current_user.stub(admin?: true)
+      # controller.current_user.stub(admin?: true)
+      allow(user).to receive_messages(:admin? => true)
     end
 
     describe 'GET index' do
