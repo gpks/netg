@@ -5,6 +5,7 @@ before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :creat
   expose(:product)
   expose(:review) { Review.new }
   expose_decorated(:reviews, ancestor: :product)
+  before_filter :require_owner, only: [:update, :edit]
 
   def index
   end
@@ -30,15 +31,12 @@ before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :creat
   end
 
   def update
-   if product.user_id == current_user.id
+   
     if self.product.update(product_params)
       redirect_to category_product_url(category, product), notice: 'Product was successfully updated.'
     else
       render action: 'edit'
     end
-  else
-    redirect_to new_user_session_path
-  end
   end
  
 
@@ -52,5 +50,10 @@ before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :creat
 
   def product_params
     params.require(:product).permit(:title, :description, :price, :category_id)
+  end
+
+  def require_owner
+    redirect_to category_product_url(category, product),  :flash => { :error => "You are not allowed to edit this product." }  if current_user!=product.user
+
   end
 end
