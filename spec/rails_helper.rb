@@ -24,6 +24,12 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
+  config.expect_with :rspec do |c|
+        # ...or explicitly enable both
+    c.syntax = [:should, :expect]
+  end
+  
+
   config.include Devise::TestHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
   # ## Mock Framework

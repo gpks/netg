@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :create]
   expose(:category)
   expose(:products)
   expose(:product)
@@ -30,12 +30,15 @@ class ProductsController < ApplicationController
   end
 
   def update
-   
+   if product.user_id == current_user.id
     if self.product.update(product_params)
       redirect_to category_product_url(category, product), notice: 'Product was successfully updated.'
     else
       render action: 'edit'
     end
+  else
+    redirect_to new_user_session_path
+  end
   end
  
 
