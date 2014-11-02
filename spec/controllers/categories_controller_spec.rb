@@ -10,8 +10,6 @@ describe CategoriesController do
 
   before do
     sign_in user
-    # account.stub(:closed?).and_return(false)
-    # allow(account).to receive(:closed?).and_return(false)
     allow(controller).to receive(:user_signed_in?).and_return(true)
     allow(controller).to receive(:current_user).and_return(user)
     allow(controller).to receive(:authenticate_user!).and_return(user)
@@ -116,13 +114,15 @@ describe CategoriesController do
 
       describe 'with invalid params' do
         it 'exposes a newly created but unsaved category' do
-          Category.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Category).to receive(:save).and_return(false)
+          # Category.any_instance.stub(:save).and_return(false)
           post :create, {category: { 'name' => 'invalid value'}}, valid_session
           expect(controller.category).to be_a_new(Category)
         end
 
         it "re-renders the 'new' template" do
-          Category.any_instance.stub(:save).and_return(false)
+          # Category.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Category).to receive(:save).and_return(false)
           post :create, {category: { 'name' => 'invalid value'}}, valid_session
           expect(response).to render_template('new')
         end
@@ -133,7 +133,8 @@ describe CategoriesController do
       let(:category) { Category.create! valid_attributes }
       describe 'with valid params' do
         it 'updates the requested category' do
-          Category.any_instance.should_receive(:update).with({ 'name' => 'MyString'})
+          allow_any_instance_of(Category).to receive(:update).with({ 'name' => 'MyString'})
+          # Category.any_instance.should_receive(:update).with({ 'name' => 'MyString'})
           put :update, {:id => category.to_param, :category => { 'name' => 'MyString'}}, valid_session
         end
 
@@ -150,13 +151,15 @@ describe CategoriesController do
 
       describe 'with invalid params' do
         it 'exposes the category' do
-          Category.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Category).to receive(:save).and_return(false)
+          # Category.any_instance.stub(:save).and_return(false)
           put :update, {:id => category.to_param, :category => { 'name' => 'invalid value'}}, valid_session
           expect(controller.category).to eq(category)
         end
 
         it "re-renders the 'edit' template" do
-          Category.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Category).to receive(:save).and_return(false)
+          # Category.any_instance.stub(:save).and_return(false)
           put :update, {:id => category.to_param, :category => { 'name' => 'invalid value'}}, valid_session
           response.should render_template('edit')
         end
