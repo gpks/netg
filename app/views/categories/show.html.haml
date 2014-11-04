@@ -1,17 +1,31 @@
-%p#notice= notice
-
 %p
-  %b Name:
-  = category.name
-
+  %h3 Category name: #{category.name}
+  
+%br
 %p
-  - category.products.each do |product|
-    = product.title
+  %table.table
+    %tr
+      %th Name
+      %th Average rating
+      %th
+      %th
+      %th
 
-%p
-  %h3 New product
-  = render 'products/form'
-
-= link_to 'Edit', edit_category_path(category)
-\|
+    - category.products.each do |product|
+      %tr
+        %td= product.title
+        %td= product.average_rating
+        %td= link_to 'Show', category_product_path(category, product)
+        %td= link_to 'Edit', edit_category_product_path(category, product)
+        %td
+  
+%br
+%br
+-if user_signed_in?
+  %p
+    %h4 New product
+    = render 'products/form'
+-if user_signed_in? && current_user.admin?
+  = link_to 'Edit', edit_category_path(category)
+  \|
 = link_to 'Back', categories_path, class: 'btn btn-primary'

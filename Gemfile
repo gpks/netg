@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'travis'
 gem 'ffaker'
+gem 'better_errors'
 
 group :development do
   gem 'spring'
