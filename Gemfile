@@ -20,6 +20,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'travis'
 gem 'ffaker'
 gem 'better_errors'
+gem 'rails_12factor'
 
 group :development do
   gem 'spring'
