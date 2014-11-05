@@ -1,6 +1,6 @@
 %h1 Listing categories
-
-%table.table
+%br
+%table.table.table-hover
   %tr
     %th Name
     %th
@@ -20,3 +20,7 @@
 -if user_signed_in?
   -if current_user.admin?
     = link_to 'New Category', new_category_path
+%br
+%br
+-if user_signed_in?
+  = link_to 'Users List', users_path, class: 'btn btn-primary'

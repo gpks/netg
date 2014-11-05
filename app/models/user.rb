@@ -10,4 +10,7 @@ class User < ActiveRecord::Base
   validates :firstname, presence: true
   validates :lastname, presence: true
 
+  def fullname
+    "#{self.firstname} #{self.lastname}"
+  end
 end

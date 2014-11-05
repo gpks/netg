@@ -1,0 +1,23 @@
+
+
+%div.panel.panel-default
+  %div.panel-heading
+    %h3.br-primary= user.fullname
+  %div.panel-body
+    %h5= user.email
+  
+%br
+%br  
+%h4 Reviews
+%br
+-if user_signed_in?
+  - user.reviews.last(5).each do |r|
+    %div.panel.panel-default
+      %div.panel-heading
+        %h3.panel-title= r.content
+      %div.panel-body      
+        Rated:
+        =r.rating
+%br
+= link_to 'Back', users_path, class: 'btn btn-primary'
+

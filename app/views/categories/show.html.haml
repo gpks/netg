@@ -3,7 +3,7 @@
   
 %br
 %p
-  %table.table
+  %table.table.table-hover
     %tr
       %th Name
       %th Average rating
@@ -16,7 +16,8 @@
         %td= product.title
         %td= product.average_rating
         %td= link_to 'Show', category_product_path(category, product)
-        %td= link_to 'Edit', edit_category_product_path(category, product)
+        -if product.user==current_user
+          %td= link_to 'Edit', edit_category_product_path(category, product)
         %td
   
 %br
