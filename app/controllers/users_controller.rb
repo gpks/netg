@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UserShowsController < ApplicationController
 
   expose(:users)
   expose(:user)

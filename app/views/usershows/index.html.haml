@@ -1,0 +1,23 @@
+%p
+  %h3 User list
+  
+%br
+%p
+  %table.table.table-hover
+    %tr
+      %th Name
+      %th Number of reviews
+      %th
+      
+
+    - users.each do |user|
+      %tr
+        %td= user.fullname
+        %td= user.reviews.count
+        %td= link_to 'Show', usershow_path(user)
+        
+  
+%br
+%br
+
+= link_to 'Back', categories_path, class: 'btn btn-primary'
