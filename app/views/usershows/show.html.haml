@@ -14,6 +14,8 @@
   - user.reviews.last(5).each do |r|
     %div.panel.panel-default
       %div.panel-heading
+        %h3.panel-title= r.product.title
+      %div.panel-heading
         %h3.panel-title= r.content
       %div.panel-body      
         Rated:
