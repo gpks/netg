@@ -1,4 +1,8 @@
-%p= review.content
-%p
-  %b= review.rating
-  %em= review.author
+%div.panel.panel-default
+  %div.panel-heading
+    %h3.panel-title= review.author
+  %div.panel-heading
+    %p.panel-title Review: #{review.content}
+  %div.panel-body      
+    Rated:
+    =review.rating

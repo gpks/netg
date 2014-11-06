@@ -20,7 +20,10 @@
 -if user_signed_in?
   = render 'reviews/form'
 
+%br
+
 = render reviews
+%br
 -if product.user==current_user
   = link_to 'Edit', edit_category_product_path(category.id, product.id)
   \|
