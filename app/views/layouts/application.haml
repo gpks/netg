@@ -12,7 +12,7 @@
     %nav.navbar.navbar-inverse
       .container-fluid
         .navbar-header
-          %span.navbar-brand Netguru Warszawa Workshops Listopad 2014
+          %span.navbar-brand= link_to "Netguru Warszawa Workshops Listopad 2014", categories_path
         %p.navbar-text.navbar-right
           - if user_signed_in? 
             %p.navbar-text.navbar-right Logged in as  #{current_user.email} 
